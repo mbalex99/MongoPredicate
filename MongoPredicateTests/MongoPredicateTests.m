@@ -7,7 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "MongoDBPredicateAdaptor.h"
+#import "MongoPredicate.h"
+
 @interface MongoPredicateTests : XCTestCase
 
 @end

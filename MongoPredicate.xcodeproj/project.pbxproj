@@ -10,9 +10,9 @@
 		503C0DD71E39E36D00E93B06 /* MongoPredicate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503C0DCD1E39E36D00E93B06 /* MongoPredicate.framework */; };
 		503C0DDC1E39E36D00E93B06 /* MongoPredicateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C0DDB1E39E36D00E93B06 /* MongoPredicateTests.m */; };
 		503C0DDE1E39E36D00E93B06 /* MongoPredicate.h in Headers */ = {isa = PBXBuildFile; fileRef = 503C0DD01E39E36D00E93B06 /* MongoPredicate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		503C0DEB1E39E3E800E93B06 /* MongoDBPredicateAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 503C0DE91E39E3E800E93B06 /* MongoDBPredicateAdaptor.h */; };
-		503C0DEC1E39E3E800E93B06 /* MongoDBPredicateAdaptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C0DEA1E39E3E800E93B06 /* MongoDBPredicateAdaptor.m */; };
+		503C0DEC1E39E3E800E93B06 /* MongoPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C0DEA1E39E3E800E93B06 /* MongoPredicate.m */; };
 		503C0DEE1E39E53E00E93B06 /* MongoPredicate.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 503C0DED1E39E53E00E93B06 /* MongoPredicate.podspec */; };
+		503C0DEF1E39FAE500E93B06 /* MongoPredicate.h in Sources */ = {isa = PBXBuildFile; fileRef = 503C0DD01E39E36D00E93B06 /* MongoPredicate.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,8 +32,7 @@
 		503C0DD61E39E36D00E93B06 /* MongoPredicateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MongoPredicateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		503C0DDB1E39E36D00E93B06 /* MongoPredicateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MongoPredicateTests.m; sourceTree = "<group>"; };
 		503C0DDD1E39E36D00E93B06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		503C0DE91E39E3E800E93B06 /* MongoDBPredicateAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MongoDBPredicateAdaptor.h; sourceTree = "<group>"; };
-		503C0DEA1E39E3E800E93B06 /* MongoDBPredicateAdaptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MongoDBPredicateAdaptor.m; sourceTree = "<group>"; };
+		503C0DEA1E39E3E800E93B06 /* MongoPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MongoPredicate.m; sourceTree = "<group>"; };
 		503C0DED1E39E53E00E93B06 /* MongoPredicate.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MongoPredicate.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,8 +79,7 @@
 			children = (
 				503C0DD01E39E36D00E93B06 /* MongoPredicate.h */,
 				503C0DD11E39E36D00E93B06 /* Info.plist */,
-				503C0DE91E39E3E800E93B06 /* MongoDBPredicateAdaptor.h */,
-				503C0DEA1E39E3E800E93B06 /* MongoDBPredicateAdaptor.m */,
+				503C0DEA1E39E3E800E93B06 /* MongoPredicate.m */,
 			);
 			path = MongoPredicate;
 			sourceTree = "<group>";
@@ -103,7 +101,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				503C0DDE1E39E36D00E93B06 /* MongoPredicate.h in Headers */,
-				503C0DEB1E39E3E800E93B06 /* MongoDBPredicateAdaptor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,7 +206,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				503C0DEC1E39E3E800E93B06 /* MongoDBPredicateAdaptor.m in Sources */,
+				503C0DEF1E39FAE500E93B06 /* MongoPredicate.h in Sources */,
+				503C0DEC1E39E3E800E93B06 /* MongoPredicate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +405,7 @@
 				503C0DE31E39E36D00E93B06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		503C0DE41E39E36D00E93B06 /* Build configuration list for PBXNativeTarget "MongoPredicateTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +414,7 @@
 				503C0DE61E39E36D00E93B06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
