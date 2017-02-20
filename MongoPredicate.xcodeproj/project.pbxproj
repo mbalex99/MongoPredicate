@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		503C0DD71E39E36D00E93B06 /* MongoPredicate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503C0DCD1E39E36D00E93B06 /* MongoPredicate.framework */; };
 		503C0DDC1E39E36D00E93B06 /* MongoPredicateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C0DDB1E39E36D00E93B06 /* MongoPredicateTests.m */; };
-		503C0DDE1E39E36D00E93B06 /* MongoPredicate.h in Headers */ = {isa = PBXBuildFile; fileRef = 503C0DD01E39E36D00E93B06 /* MongoPredicate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		503C0DEC1E39E3E800E93B06 /* MongoPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C0DEA1E39E3E800E93B06 /* MongoPredicate.m */; };
+		503C0DDE1E39E36D00E93B06 /* NSPredicate+Mongo.h in Headers */ = {isa = PBXBuildFile; fileRef = 503C0DD01E39E36D00E93B06 /* NSPredicate+Mongo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		503C0DEC1E39E3E800E93B06 /* NSPredicate+Mongo.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C0DEA1E39E3E800E93B06 /* NSPredicate+Mongo.m */; };
 		503C0DEE1E39E53E00E93B06 /* MongoPredicate.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 503C0DED1E39E53E00E93B06 /* MongoPredicate.podspec */; };
-		503C0DEF1E39FAE500E93B06 /* MongoPredicate.h in Sources */ = {isa = PBXBuildFile; fileRef = 503C0DD01E39E36D00E93B06 /* MongoPredicate.h */; };
+		503C0DEF1E39FAE500E93B06 /* NSPredicate+Mongo.h in Sources */ = {isa = PBXBuildFile; fileRef = 503C0DD01E39E36D00E93B06 /* NSPredicate+Mongo.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,12 +27,12 @@
 
 /* Begin PBXFileReference section */
 		503C0DCD1E39E36D00E93B06 /* MongoPredicate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MongoPredicate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		503C0DD01E39E36D00E93B06 /* MongoPredicate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MongoPredicate.h; sourceTree = "<group>"; };
+		503C0DD01E39E36D00E93B06 /* NSPredicate+Mongo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSPredicate+Mongo.h"; sourceTree = "<group>"; };
 		503C0DD11E39E36D00E93B06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		503C0DD61E39E36D00E93B06 /* MongoPredicateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MongoPredicateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		503C0DDB1E39E36D00E93B06 /* MongoPredicateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MongoPredicateTests.m; sourceTree = "<group>"; };
 		503C0DDD1E39E36D00E93B06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		503C0DEA1E39E3E800E93B06 /* MongoPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MongoPredicate.m; sourceTree = "<group>"; };
+		503C0DEA1E39E3E800E93B06 /* NSPredicate+Mongo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPredicate+Mongo.m"; sourceTree = "<group>"; };
 		503C0DED1E39E53E00E93B06 /* MongoPredicate.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MongoPredicate.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,9 +77,9 @@
 		503C0DCF1E39E36D00E93B06 /* MongoPredicate */ = {
 			isa = PBXGroup;
 			children = (
-				503C0DD01E39E36D00E93B06 /* MongoPredicate.h */,
 				503C0DD11E39E36D00E93B06 /* Info.plist */,
-				503C0DEA1E39E3E800E93B06 /* MongoPredicate.m */,
+				503C0DD01E39E36D00E93B06 /* NSPredicate+Mongo.h */,
+				503C0DEA1E39E3E800E93B06 /* NSPredicate+Mongo.m */,
 			);
 			path = MongoPredicate;
 			sourceTree = "<group>";
@@ -100,7 +100,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				503C0DDE1E39E36D00E93B06 /* MongoPredicate.h in Headers */,
+				503C0DDE1E39E36D00E93B06 /* NSPredicate+Mongo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,8 +206,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				503C0DEF1E39FAE500E93B06 /* MongoPredicate.h in Sources */,
-				503C0DEC1E39E3E800E93B06 /* MongoPredicate.m in Sources */,
+				503C0DEF1E39FAE500E93B06 /* NSPredicate+Mongo.h in Sources */,
+				503C0DEC1E39E3E800E93B06 /* NSPredicate+Mongo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

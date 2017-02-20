@@ -4,7 +4,7 @@
 //  Created by Tim Bansemer on 6/09/13.
 //  Copyright (c) 2013 Tim Bansemer. All rights reserved.
 
-#import "MongoPredicate.h"
+#import "NSPredicate+Mongo.h"
 #import <MapKit/MapKit.h>
 
 
@@ -38,14 +38,16 @@ NSString *const jsEqualsOperator = @"===";
 
 
 
-@implementation MongoPredicate
+@implementation NSPredicate(Mongo)
 
 
 #pragma mark - public methods
-+(NSDictionary *) queryDictFromPredicate:(NSPredicate *)predicate
-                                 orError:(NSError **)error
-{
-    NSDictionary *result = [MongoPredicate tranformPredicate:predicate];
+
+
+
+-(NSDictionary *)queryDictOrError:(NSError *__autoreleasing *)error{
+
+    NSDictionary *result = [NSPredicate tranformPredicate:self];
 
     if (!result && error) {
         NSString *description = NSLocalizedString(@"The predicate is not supported.", nil);
@@ -65,11 +67,11 @@ NSString *const jsEqualsOperator = @"===";
     NSDictionary *result = nil;
 
     if ([predicate isKindOfClass:[NSComparisonPredicate class]]) {
-        result = [MongoPredicate transformComparisonPredicate:
+        result = [NSPredicate transformComparisonPredicate:
                   (NSComparisonPredicate *)predicate];
     }
     else if ([predicate isKindOfClass:[NSCompoundPredicate class]]){
-        result = [MongoPredicate transformCompoundPredicate:
+        result = [NSPredicate transformCompoundPredicate:
                   (NSCompoundPredicate *)predicate];
     }
 
@@ -83,18 +85,18 @@ NSString *const jsEqualsOperator = @"===";
 
     if (predicate.leftExpression.expressionType==NSFunctionExpressionType||
         predicate.rightExpression.expressionType==NSFunctionExpressionType) {
-        result = [MongoPredicate transformFunctionBasedPredicate:predicate];
+        result = [NSPredicate transformFunctionBasedPredicate:predicate];
     }
     else{
         NSPredicate *replacementPredicate = nil;
         NSString *operator = nil;
 
-        operator = [MongoPredicate operatorStringForPredicate:predicate];
+        operator = [NSPredicate operatorStringForPredicate:predicate];
         if (!operator) {
-            replacementPredicate = [MongoPredicate replacementPredicateForPredicate:predicate];
+            replacementPredicate = [NSPredicate replacementPredicateForPredicate:predicate];
         }
         if (replacementPredicate) {
-            result = [MongoPredicate tranformPredicate:replacementPredicate];
+            result = [NSPredicate tranformPredicate:replacementPredicate];
         }
         if (operator) {
             NSArray *expressions = nil;
@@ -102,7 +104,7 @@ NSString *const jsEqualsOperator = @"===";
                            predicate.leftExpression,
                            predicate.rightExpression, nil];
 
-            result = [MongoPredicate transformExpressions:expressions
+            result = [NSPredicate transformExpressions:expressions
                                                       withOperator:operator];
         }
 
@@ -116,7 +118,7 @@ NSString *const jsEqualsOperator = @"===";
     NSMutableArray *subPredicates = [NSMutableArray new];
 
     for (NSPredicate *predicate in predicates) {
-        NSDictionary *subResult = [MongoPredicate tranformPredicate:predicate];
+        NSDictionary *subResult = [NSPredicate tranformPredicate:predicate];
         if (!subResult) {
             break;
         }
@@ -208,22 +210,22 @@ NSString *const jsEqualsOperator = @"===";
 
     if (predicate.predicateOperatorType==NSBetweenPredicateOperatorType) {
         replacementPredicate =
-        [MongoPredicate replacementPredicateForBetweenPredicate:predicate];
+        [NSPredicate replacementPredicateForBetweenPredicate:predicate];
     }
     else if (predicate.predicateOperatorType==NSBeginsWithPredicateOperatorType){
-        replacementPredicate = [MongoPredicate replacementPredicateBeginsWithPredicate:predicate];
+        replacementPredicate = [NSPredicate replacementPredicateBeginsWithPredicate:predicate];
 
     }
     else if (predicate.predicateOperatorType==NSContainsPredicateOperatorType) {
-        replacementPredicate = [MongoPredicate replacementPredicateContainsPredicate:predicate];
+        replacementPredicate = [NSPredicate replacementPredicateContainsPredicate:predicate];
 
     }
     else if (predicate.predicateOperatorType == NSEndsWithPredicateOperatorType) {
-        replacementPredicate = [MongoPredicate replacementPredicateEndsWithPredicate:predicate];
+        replacementPredicate = [NSPredicate replacementPredicateEndsWithPredicate:predicate];
 
     }
     else if (predicate.predicateOperatorType == NSLikePredicateOperatorType){
-        replacementPredicate = [MongoPredicate replacementPredicateLikePredicate:predicate];
+        replacementPredicate = [NSPredicate replacementPredicateLikePredicate:predicate];
     }
 
     return replacementPredicate;
@@ -250,7 +252,7 @@ NSString *const jsEqualsOperator = @"===";
     }
 
     if (operator) {
-        result = [MongoPredicate tranformPredicates:predicate.subpredicates
+        result = [NSPredicate tranformPredicates:predicate.subpredicates
                                                 withOperator:operator];
     }
 
@@ -263,7 +265,7 @@ NSString *const jsEqualsOperator = @"===";
     id constant = predicate.rightExpression.constantValue;
     if (constant) {
         NSString *beginsWithRegex = [NSString stringWithFormat:@"^%@",predicate.rightExpression.constantValue];
-        newPredicate = [MongoPredicate replacementPredicateForPredicate:predicate withRegexString:beginsWithRegex];
+        newPredicate = [NSPredicate replacementPredicateForPredicate:predicate withRegexString:beginsWithRegex];
     }
     return newPredicate;
 }
@@ -273,7 +275,7 @@ NSString *const jsEqualsOperator = @"===";
     id constant = predicate.rightExpression.constantValue;
     if (constant) {
         NSString *endsWithRegex = [NSString stringWithFormat:@".*%@",predicate.rightExpression.constantValue];
-        newPredicate = [MongoPredicate replacementPredicateForPredicate:predicate withRegexString:endsWithRegex];
+        newPredicate = [NSPredicate replacementPredicateForPredicate:predicate withRegexString:endsWithRegex];
     }
     return newPredicate;
 }
@@ -283,7 +285,7 @@ NSString *const jsEqualsOperator = @"===";
     id constant = predicate.rightExpression.constantValue;
     if (constant) {
         NSString *containsRegex = [NSString stringWithFormat:@".*%@.*",predicate.rightExpression.constantValue];
-        newPredicate = [MongoPredicate replacementPredicateForPredicate:predicate withRegexString:containsRegex];
+        newPredicate = [NSPredicate replacementPredicateForPredicate:predicate withRegexString:containsRegex];
     }
     return newPredicate;
 }
@@ -293,7 +295,7 @@ NSString *const jsEqualsOperator = @"===";
     id constant = predicate.rightExpression.constantValue;
     if (constant) {
         NSString *likeRegex = [NSString stringWithFormat:@"/(%@)/",predicate.rightExpression.constantValue];
-        newPredicate = [MongoPredicate replacementPredicateForPredicate:predicate withRegexString:likeRegex];
+        newPredicate = [NSPredicate replacementPredicateForPredicate:predicate withRegexString:likeRegex];
     }
     return newPredicate;
 }
@@ -316,8 +318,8 @@ NSString *const jsEqualsOperator = @"===";
     id lowerBound = [bounds objectAtIndex:0];
     id upperBound = [bounds objectAtIndex:1];
 
-    NSExpression *lowerBoundExpression = [MongoPredicate ensureExpression:lowerBound];
-    NSExpression *upperBoundExpression = [MongoPredicate ensureExpression:upperBound];
+    NSExpression *lowerBoundExpression = [NSPredicate ensureExpression:lowerBound];
+    NSExpression *upperBoundExpression = [NSPredicate ensureExpression:upperBound];
 
     NSPredicate *lowerSubPredicate =
     [NSComparisonPredicate predicateWithLeftExpression:leftExpression
@@ -357,8 +359,8 @@ NSString *const jsEqualsOperator = @"===";
 +(NSDictionary*)transformFunctionBasedPredicate:(NSComparisonPredicate*)predicate{
     NSDictionary *result = nil;
 
-    predicate = [MongoPredicate predicateWithJSThisToKeyPathsInPredicate:predicate];
-    NSString *operator = [MongoPredicate javascriptOperatorStringForPredicate:predicate];
+    predicate = [NSPredicate predicateWithJSThisToKeyPathsInPredicate:predicate];
+    NSString *operator = [NSPredicate javascriptOperatorStringForPredicate:predicate];
     if (operator) {
         NSString *functionString = [NSString stringWithFormat:@"%@ %@ %@",predicate.leftExpression.description, operator, predicate.rightExpression.description];
 
@@ -368,8 +370,8 @@ NSString *const jsEqualsOperator = @"===";
 }
 
 +(NSComparisonPredicate*)predicateWithJSThisToKeyPathsInPredicate:(NSComparisonPredicate*)predicate{
-    NSExpression *leftExpression = [MongoPredicate ensureKeyPathExpressionsContainJSThisInExpression:predicate.leftExpression];
-    NSExpression *rightExpression = [MongoPredicate ensureKeyPathExpressionsContainJSThisInExpression:predicate.rightExpression];
+    NSExpression *leftExpression = [NSPredicate ensureKeyPathExpressionsContainJSThisInExpression:predicate.leftExpression];
+    NSExpression *rightExpression = [NSPredicate ensureKeyPathExpressionsContainJSThisInExpression:predicate.rightExpression];
     NSComparisonPredicate *newPredicate = (NSComparisonPredicate*)[NSComparisonPredicate predicateWithLeftExpression:leftExpression rightExpression:rightExpression modifier:predicate.comparisonPredicateModifier type:predicate.predicateOperatorType options:predicate.options];
 
     return newPredicate;
@@ -384,7 +386,7 @@ NSString *const jsEqualsOperator = @"===";
     switch (expression.expressionType)
     {
         case NSConstantValueExpressionType:
-            result = [MongoPredicate transformConstant:expression.constantValue modifyingOperator:operator];
+            result = [NSPredicate transformConstant:expression.constantValue modifyingOperator:operator];
             break;
         case NSKeyPathExpressionType:
             result = expression.keyPath;
@@ -424,15 +426,15 @@ NSString *const jsEqualsOperator = @"===";
         NSString *keyPath = keyPathExpression.keyPath;
         if ([keyPath hasSuffix:@".@count"]) {
             keyPath = [keyPath substringToIndex:keyPath.length - @".@count".length];
-            id value = [MongoPredicate transformConstant:constantValueExpression.constantValue
+            id value = [NSPredicate transformConstant:constantValueExpression.constantValue
                                                 modifyingOperator:&operator];
             result = @{keyPath : @{@"$size" : value}};
         }
     }
 
     if (!result) {
-        id field = [MongoPredicate transformExpression:expressions[0] modifyingOperator:&operator];
-        id param = [MongoPredicate transformExpression:expressions[1] modifyingOperator:&operator];
+        id field = [NSPredicate transformExpression:expressions[0] modifyingOperator:&operator];
+        id param = [NSPredicate transformExpression:expressions[1] modifyingOperator:&operator];
 
         if ([operator isEqualToString:@"eq"]) {
             result = @{field : param};
@@ -454,7 +456,7 @@ NSString *const jsEqualsOperator = @"===";
         case NSFunctionExpressionType:{
             NSMutableArray *newArguments = [NSMutableArray new];
             for (NSExpression *argument in expression.arguments) {
-                NSExpression *newArgument = [MongoPredicate ensureKeyPathExpressionsContainJSThisInExpression:argument];
+                NSExpression *newArgument = [NSPredicate ensureKeyPathExpressionsContainJSThisInExpression:argument];
                 [newArguments addObject:newArgument];
             }
             newExpression = [NSExpression expressionForFunction:expression.function arguments:newArguments];
@@ -476,30 +478,30 @@ NSString *const jsEqualsOperator = @"===";
     }
     else if ([constant isKindOfClass:[NSString class]]) {
         if ([*operator isEqualToString:inOperator]) {
-            result = [MongoPredicate transformArrayConstant:@[constant]];
+            result = [NSPredicate transformArrayConstant:@[constant]];
         }
         else{
-            result = [MongoPredicate transformStringConstant:constant];
+            result = [NSPredicate transformStringConstant:constant];
         }
     }
     else if ([constant isKindOfClass:[NSDate class]]) {
-        result = [MongoPredicate transformDateConstant:constant];
+        result = [NSPredicate transformDateConstant:constant];
     }
     else if ([constant isKindOfClass:[NSDecimalNumber class]]) {
-        result = [MongoPredicate transformDecimalNumberConstant:constant];
+        result = [NSPredicate transformDecimalNumberConstant:constant];
     }
     else if ([constant isKindOfClass:[NSNumber class]]) {
-        result = [MongoPredicate transformNumberConstant:constant];
+        result = [NSPredicate transformNumberConstant:constant];
     }
     else if ([constant isKindOfClass:[NSArray class]]) {
-        result = [MongoPredicate transformArrayConstant:constant];
+        result = [NSPredicate transformArrayConstant:constant];
     }
     else if ([constant isKindOfClass:[NSSet class]]){
-        result = [MongoPredicate transformSetConstant:constant];
+        result = [NSPredicate transformSetConstant:constant];
     }
 #if !TARGET_OS_WATCH
     else if ([constant isKindOfClass:[MKShape class]]){
-        result = [MongoPredicate transformGeoShapeConstant:constant];
+        result = [NSPredicate transformGeoShapeConstant:constant];
         *operator = geoInOperator;
     }
 #endif

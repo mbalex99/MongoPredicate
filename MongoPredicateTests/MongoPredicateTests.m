@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "MongoPredicate.h"
+#import "NSPredicate+Mongo.h"
 
 @interface MongoPredicateTests : XCTestCase
 
@@ -27,6 +27,9 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstname beginswith[c] %@", @"max"];
+    NSDictionary *dict = [predicate queryDictOrError:nil];
+    NSLog(@"%@", dict);
 }
 
 - (void)testPerformanceExample {

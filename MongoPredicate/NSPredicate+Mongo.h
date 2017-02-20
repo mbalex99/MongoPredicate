@@ -17,9 +17,9 @@ FOUNDATION_EXPORT const unsigned char MongoPredicateVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <MongoPredicate/PublicHeader.h>
 
 
-@interface MongoPredicate : NSObject
+@interface NSPredicate(Mongo)
 
-+(NSDictionary *)queryDictFromPredicate:(NSPredicate *)predicate
-                                orError:(NSError **)error;
+-(NSDictionary *)queryDictOrError:(NSError **)error;
+
 
 @end
