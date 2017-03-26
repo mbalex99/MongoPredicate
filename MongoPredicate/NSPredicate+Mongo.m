@@ -62,7 +62,7 @@ NSString *const jsEqualsOperator = @"===";
 
 
 #pragma mark - private methods
-+(NSDictionary *) tranformPredicate:(NSPredicate *)predicate
++(NSDictionary *)tranformPredicate:(NSPredicate *)predicate
 {
     NSDictionary *result = nil;
 

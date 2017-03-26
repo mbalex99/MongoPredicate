@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "503C0DCC1E39E36D00E93B06"
+               BlueprintIdentifier = "501644561E63B6AE00F04DB2"
                BuildableName = "MongoPredicate.framework"
                BlueprintName = "MongoPredicate"
                ReferencedContainer = "container:MongoPredicate.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "503C0DCC1E39E36D00E93B06"
+            BlueprintIdentifier = "501644561E63B6AE00F04DB2"
             BuildableName = "MongoPredicate.framework"
             BlueprintName = "MongoPredicate"
             ReferencedContainer = "container:MongoPredicate.xcodeproj">
@@ -64,7 +64,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "503C0DCC1E39E36D00E93B06"
+            BlueprintIdentifier = "501644561E63B6AE00F04DB2"
             BuildableName = "MongoPredicate.framework"
             BlueprintName = "MongoPredicate"
             ReferencedContainer = "container:MongoPredicate.xcodeproj">
@@ -82,7 +82,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "503C0DCC1E39E36D00E93B06"
+            BlueprintIdentifier = "501644561E63B6AE00F04DB2"
             BuildableName = "MongoPredicate.framework"
             BlueprintName = "MongoPredicate"
             ReferencedContainer = "container:MongoPredicate.xcodeproj">

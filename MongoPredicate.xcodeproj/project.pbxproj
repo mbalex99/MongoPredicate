@@ -10,6 +10,7 @@
 		5016445B1E63B6AE00F04DB2 /* MongoPredicate.h in Headers */ = {isa = PBXBuildFile; fileRef = 501644591E63B6AE00F04DB2 /* MongoPredicate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5016445F1E63B6BC00F04DB2 /* NSPredicate+Mongo.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C0DEA1E39E3E800E93B06 /* NSPredicate+Mongo.m */; };
 		503C0DDC1E39E36D00E93B06 /* MongoPredicateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C0DDB1E39E36D00E93B06 /* MongoPredicateTests.m */; };
+		E3E731761E886C7100D5DB1E /* NSPredicate+Mongo.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C0DEA1E39E3E800E93B06 /* NSPredicate+Mongo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -208,6 +209,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3E731761E886C7100D5DB1E /* NSPredicate+Mongo.m in Sources */,
 				503C0DDC1E39E36D00E93B06 /* MongoPredicateTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,6 +381,7 @@
 				5016445E1E63B6AE00F04DB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		503C0DC71E39E36D00E93B06 /* Build configuration list for PBXProject "MongoPredicate" */ = {
 			isa = XCConfigurationList;

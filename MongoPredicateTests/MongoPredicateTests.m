@@ -24,19 +24,65 @@
     [super tearDown];
 }
 
-- (void)testExample {
+- (void)testSimpleEquality {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstname beginswith[c] %@", @"max"];
-    NSDictionary *dict = [predicate queryDictOrError:nil];
-    NSLog(@"%@", dict);
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstname == %@", @"max"];
+    NSError *error = nil;
+    NSDictionary *dict = [predicate queryDictOrError:&error];
+    XCTAssertNil(error);
+    XCTAssertEqualObjects(dict, @{ @"firstname": @"max"});
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testContainsSubstring {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstname CONTAINS[cd] %@", @"max"];
+    NSError *error = nil;
+    NSDictionary *dict = [predicate queryDictOrError:&error];
+    XCTAssertNil(error);
+    XCTAssertEqualObjects(dict, @{
+                                  @"firstname": @{
+                                          @"$regex": @".*max.*"
+                                          }
+                                  });
 }
 
+- (void)testGreaterOrEqualsTo {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"age >= %d", 25];
+    NSError *error = nil;
+    NSDictionary *dict = [predicate queryDictOrError:&error];
+    XCTAssertNil(error);
+    XCTAssertEqualObjects(dict, @{
+                                  @"age": @{
+                                          @"$gte": @(25)
+                                          }
+                                  });
+}
+
+- (void)testLessThanOrEqualsTo {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"age <= %d", 25];
+    NSError *error = nil;
+    NSDictionary *dict = [predicate queryDictOrError:&error];
+    XCTAssertNil(error);
+    XCTAssertEqualObjects(dict, @{
+                                  @"age": @{
+                                          @"$lte": @(25)
+                                          }
+                                  });
+}
+
+- (void )testBetweenRange {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"expenses BETWEEN {200, 400}"];
+    NSError *error = nil;
+    NSDictionary *dict = [predicate queryDictOrError:&error];
+    XCTAssertNil(error);
+    
+    NSDictionary *expectedDictionary = @{
+                                         @"$and": @[
+                                                 @{@"expenses": @{ @"$gte": @(200) }},
+                                                 @{@"expenses": @{ @"$lte": @(400) }}
+                                                 ]
+                                         };
+    
+    XCTAssertEqualObjects(dict, expectedDictionary);
+}
 @end
